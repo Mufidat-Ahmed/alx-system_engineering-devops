@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#displays best school but for 9th one adds hi to it
+
+index=0
+while [ $index -le 10 ]
+do
+	if [ $index -eq 9 ]
+	then
+		echo "Best School"
+		echo "Hi"
+	else
+		echo "Best School"
+	fi
+	((index++))
+done
