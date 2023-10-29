@@ -1,16 +1,11 @@
 #Client configuration file
-include stdlib
 
-file { 'Turn off password authentication':
-  ensure => present,
-  path   => '/etc/ssh/ssh_config',
-  line   => 'PasswordAuthentication no',
-  replace => true,
-}
-
-file { 'Declare identity file':
-  ensure => present,
-  path   => '/etc/ssh/ssh_config',
-  line   => 'IdentityFile ~/.ssh/school',
-  replace => true,
+file { '/home/745335237cf2/.ssh/config':
+  ensure  => file,
+  owner   => '745335237cf2',
+  group   => '745335237cf2',
+  mode    => '0600',
+  content => "# SSH client configuration\n
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no\n",
 }
