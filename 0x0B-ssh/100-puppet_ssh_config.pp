@@ -1,19 +1,11 @@
-#Client configuration file
+# Puppet manifest to configure SSH client
 
-file { '/root/.ssh/config':
+file { '/etc/ssh/ssh_config':
   ensure  => file,
   owner   => 'root',
   group   => 'root',
-  mode    => '0600',
+  mode    => '0644',
   content => "# SSH client configuration\n
     IdentityFile ~/.ssh/school
     PasswordAuthentication no\n",
-  require => File['/root/.ssh'],
-}
-
-file { '/root/.ssh':
-  ensure => directory,
-  owner  => 'root',
-  group  => 'root',
-  mode   => '0700',
 }
