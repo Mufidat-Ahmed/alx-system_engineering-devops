@@ -1,11 +1,19 @@
 #Client configuration file
 
-file { '/home/745335237cf2/.ssh/config':
+file { '/root/.ssh/config':
   ensure  => file,
-  owner   => '745335237cf2',
-  group   => '745335237cf2',
+  owner   => 'root',
+  group   => 'root',
   mode    => '0600',
   content => "# SSH client configuration\n
     IdentityFile ~/.ssh/school
     PasswordAuthentication no\n",
+  require => File['/root/.ssh'],
+}
+
+file { '/root/.ssh':
+  ensure => directory,
+  owner  => 'root',
+  group  => 'root',
+  mode   => '0700',
 }
