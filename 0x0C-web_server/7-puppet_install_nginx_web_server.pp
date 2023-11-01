@@ -1,32 +1,6 @@
-class { 'nginx':
-  package_manage => 'present',
-}
+#Install Nginx web server (w/ Puppet)
 
-file { '/var/www/html/index.nginx-debian.html':
-  ensure  => 'file',
-  content => "Hello World!\n",
-  require => Class['nginx'],
-}
-
-nginx::resource::server { 'default':
-  server_name => '_',
-  location    => {
-    '/'          => {
-      root => '/var/www/html',
-      index => 'index.nginx-debian.html',
-    },
-    '/redirect_me' => {
-      rewrite => 'https://github.com/Mufidat-Ahmed permanent',
-    },
-    '/404.html'   => {
-      internal => 'true',
-    },
-  },
-  require     => File['/var/www/html/index.nginx-debian.html'],
-}
-
-service { 'nginx':
-  ensure  => 'running',
-  enable  => true,
-  require => Class['nginx'],
+exec {'install':
+  provider => shell,
+  command  => 'sudo apt-get -y update ; sudo apt-get -y install nginx ; echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html ; sudo sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/Mufidat-Ahmed permanent;/" /etc/nginx/sites-available/default ; sudo service nginx start',
 }
