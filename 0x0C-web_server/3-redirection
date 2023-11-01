@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+#Configure your Nginx server so that this file is redirecting to another page
+apt-get update
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+mkdir -p /var/www/html
+echo 'Hello World!' > /var/www/html/index.html
+SERVER_CONFIG=\
+"server {
+    listen 80;
+    server_name mufidat.tech;
+
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
+
+    location / {
+        root /var/www/html;
+        index index.html;
+    }
+}"
+echo -e "$SERVER_CONFIG" > /etc/nginx/sites-available/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+rm -f /etc/nginx/sites-enabled/default
+nginx -t
+service nginx reload
