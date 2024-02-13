@@ -3,7 +3,7 @@ Python
 Scripting
 Back-end
 API
-
+code
 Background Context
 Questions involving APIs are common for interviews. 
 Sometimes they’re as simple as ‘write a Python script that queries a given endpoint’, 
