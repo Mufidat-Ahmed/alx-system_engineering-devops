@@ -6,4 +6,4 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-sudo -u "$1" whoami:wq
+sudo -u "$1" whoami

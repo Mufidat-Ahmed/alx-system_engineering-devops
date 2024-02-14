@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+#bash script that configures the container:
+#nginx must be running as nginx user
+#nginx must be listening on all active IPs on port 8080
+#You cannot use apt-get remove
+apt-get update
+apt-get install -y nginx
+    
+service nginx stop
+sed -i 's/^user .*;/user nginx;/' /etc/nginx/nginx.conf
+sed -i 's/^listen .*;/listen 8080;/g' /etc/nginx/sites-available/default
+    
+service nginx start
