@@ -19,4 +19,4 @@ v1.0.0"
         print("None")
         return
     ten = response.json().get("data")
-    [print(i.get("data").get("title")) for i in ten.get("children")
+    [print(i.get("data").get("title")) for i in ten.get("children")]
